@@ -1,7 +1,3 @@
-/*
- *= require_tree .
- *= require_self
- */
 
 @import "bootstrap";
 
@@ -12,3 +8,13 @@ a {
 a:hover {
     text-decoration: underline;
 }
+body {
+background-color: blue($color: #000000);
+}
+.alert-notice {
+    @extend .alert-success;
+  }
+  
+  .alert-alert {
+    @extend .alert-danger;
+  }
