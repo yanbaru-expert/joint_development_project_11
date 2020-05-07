@@ -4,12 +4,19 @@
     <title>共同開発 基礎</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+     
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+
+<% flash.each do |msg_type, msg| %>
+  <div class="alert alert-<%= msg_type %>" role="alert">
+    <a href="#" class="close" data-dismiss="alert">×</a>
+    <%= msg %>
+  </div>
+<% end %>
     <%= render "layouts/header" %>
     <%= yield %>
   </body>

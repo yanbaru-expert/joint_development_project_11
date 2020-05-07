@@ -5,7 +5,14 @@ class MessagesController < ApplicationController
   end
 #新規作成
   def create
-    Message.create(message_params)
+    @message=Message.new(message_params)
+    if @message.save
+      redirect_to messages_path
+      flash[:notice] = "登録完了"
+    else
+      flash.now[:alert] = "メンバーの登録に失敗しました。"
+    render :new
+    end
   end
   #一覧画面
   def index
@@ -17,15 +24,21 @@ class MessagesController < ApplicationController
   def destroy
     message= Message.find(params[:id])
     message.delete
+    flash[:notice]="削除完了"
+    redirect_to messages_path
   end
   def edit
     @message = Message.find(params[:id])
   end
   def update
     @message =Message.find(params[:id])
-    @message.update(message_params)
-  
-
+    if @message.update(message_params)
+     flash[:notice]="更新完了"
+     redirect_to messages_path
+    else
+      flash[:notice]="更新失敗"
+      render :edit
+    end
   end
 
 
